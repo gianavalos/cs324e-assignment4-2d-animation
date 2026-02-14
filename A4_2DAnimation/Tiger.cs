@@ -79,7 +79,7 @@ public class Tiger
             frontLeftPosition,
             null,
             _tint,
-            -_legRotation,
+            _legRotation,
             legOrigin,
             1.0f,
             SpriteEffects.None,
