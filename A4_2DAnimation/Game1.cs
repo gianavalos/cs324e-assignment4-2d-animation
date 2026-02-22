@@ -15,9 +15,16 @@ public class Game1 : Game
     private Texture2D _tigerFrontLeg;
     private Texture2D _tigerBackLeg;
     private Texture2D _TigerTail;
+
+    private Texture2D _birdBody;
+    private Texture2D _birdFrontWing;
+    private Texture2D _birdBackWing;
     
     private Tiger _tiger1;
     private Tiger _tiger2;
+
+    private Bird _bird1;
+    private Bird _bird2;
 
     public Game1()
     {
@@ -43,6 +50,10 @@ public class Game1 : Game
         _tigerFrontLeg = Content.Load<Texture2D>("Tiger/tiger-front-leg");
         _tigerBackLeg = Content.Load<Texture2D>("Tiger/tiger-back-leg");
         _TigerTail = Content.Load<Texture2D>("Tiger/tiger-tail");
+        
+        _birdBody = Content.Load<Texture2D>("Bird/bird-body");
+        _birdFrontWing = Content.Load<Texture2D>("Bird/bird-front-wing");
+        _birdBackWing = Content.Load<Texture2D>("Bird/bird-back-wing");
 
 
         _tiger1 = new Tiger(
@@ -69,7 +80,27 @@ public class Game1 : Game
             _graphics.PreferredBackBufferWidth,
             _graphics.PreferredBackBufferHeight);
 
-        
+        _bird1 = new Bird(
+            _birdBody,
+            _birdFrontWing,
+            _birdBackWing,
+            new Vector2(200, 100),
+            Color.Red,
+            0.2f,
+            150.0f,
+            _graphics.PreferredBackBufferWidth,
+            _graphics.PreferredBackBufferHeight);
+
+        _bird2 = new Bird(
+            _birdBody,
+            _birdFrontWing,
+            _birdBackWing,
+            new Vector2(100, 70),
+            Color.Blue,
+            0.1f,
+            90.0f,
+            _graphics.PreferredBackBufferWidth,
+            _graphics.PreferredBackBufferHeight);
     }
 
     protected override void Update(GameTime gameTime)
@@ -80,6 +111,9 @@ public class Game1 : Game
        
         _tiger1.Update(gameTime);
         _tiger2.Update(gameTime);
+        
+        _bird1.Update(gameTime);
+        _bird2.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -99,6 +133,8 @@ public class Game1 : Game
         
         _tiger2.Draw(_spriteBatch);
         _tiger1.Draw(_spriteBatch);
+        _bird1.Draw(_spriteBatch);
+        _bird2.Draw(_spriteBatch);
         
 
         base.Draw(gameTime);
