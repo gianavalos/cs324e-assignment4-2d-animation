@@ -25,6 +25,15 @@ public class Game1 : Game
 
     private Bird _bird1;
     private Bird _bird2;
+    
+    private Texture2D _monkeyBody;
+    private Texture2D _monkeyLeftArm;
+    private Texture2D _monkeyRightArm;
+    private Texture2D _monkeyLeftLeg;
+    private Texture2D _monkeyRightLeg;
+
+    private Monkey _monkey1;
+    private Monkey _monkey2;
 
     public Game1()
     {
@@ -54,7 +63,12 @@ public class Game1 : Game
         _birdBody = Content.Load<Texture2D>("Bird/bird-body");
         _birdFrontWing = Content.Load<Texture2D>("Bird/bird-front-wing");
         _birdBackWing = Content.Load<Texture2D>("Bird/bird-back-wing");
-
+        
+        _monkeyBody = Content.Load<Texture2D>("Monkey/monkey_body");
+        _monkeyLeftArm = Content.Load<Texture2D>("Monkey/monkey_left_arm");
+        _monkeyRightArm = Content.Load<Texture2D>("Monkey/monkey_right_arm");
+        _monkeyLeftLeg = Content.Load<Texture2D>("Monkey/monkey_left_leg");
+        _monkeyRightLeg = Content.Load<Texture2D>("Monkey/monkey_right_leg");
 
         _tiger1 = new Tiger(
             _tigerBody,
@@ -101,6 +115,34 @@ public class Game1 : Game
             90.0f,
             _graphics.PreferredBackBufferWidth,
             _graphics.PreferredBackBufferHeight);
+        
+        _monkey1 = new Monkey(
+            _monkeyBody,
+            _monkeyLeftArm,
+            _monkeyRightArm,
+            _monkeyLeftLeg,
+            _monkeyRightLeg,
+            new Vector2(740, 450),
+            Color.White,
+            0.3f,
+            60f,
+            true,
+            _graphics.PreferredBackBufferWidth,
+            _graphics.PreferredBackBufferHeight);
+
+        _monkey2 = new Monkey(
+            _monkeyBody,
+            _monkeyLeftArm,
+            _monkeyRightArm,
+            _monkeyLeftLeg,
+            _monkeyRightLeg,
+            new Vector2(770, 400),
+            Color.SandyBrown,
+            0.15f,
+            90f,
+            false,
+            _graphics.PreferredBackBufferWidth,
+            _graphics.PreferredBackBufferHeight);
     }
 
     protected override void Update(GameTime gameTime)
@@ -114,6 +156,9 @@ public class Game1 : Game
         
         _bird1.Update(gameTime);
         _bird2.Update(gameTime);
+        
+        _monkey1.Update(gameTime);
+        _monkey2.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -131,10 +176,13 @@ public class Game1 : Game
                         Color.White);
         _spriteBatch.End();
         
+        _monkey1.Draw(_spriteBatch);
+        _monkey2.Draw(_spriteBatch);
         _tiger2.Draw(_spriteBatch);
         _tiger1.Draw(_spriteBatch);
         _bird1.Draw(_spriteBatch);
         _bird2.Draw(_spriteBatch);
+        
         
 
         base.Draw(gameTime);
