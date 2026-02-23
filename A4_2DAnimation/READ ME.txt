@@ -1,0 +1,1 @@
+To run the monogame project, open project in an IDE of your choice and run the .sln file

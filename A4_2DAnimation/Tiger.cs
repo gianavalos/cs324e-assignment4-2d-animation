@@ -14,7 +14,7 @@ public class Tiger
     private Color _tint;
     private float _scale;
     private float _walkSpeed;
-    private float _walkDirection = 1;
+    private float _walkDirection = 1; // 1 right, -1 left
 
     private float _currentScale;
     private float _legRotation;
@@ -53,15 +53,19 @@ public class Tiger
         
         _position.X += _walkDirection * _walkSpeed;
 
+        // reverse direction at screen edges
         if (_position.X > _screenWidth - 100 || _position.X < 100)
         {
             _walkDirection *= -1;
         }
         
+        // oscillate scale
         _currentScale = _scale + (float)Math.Sin(_elapsedTime) * 0.05f;
         
+        // animate legs based on walk speed
         _legRotation = (float)Math.Sin(_elapsedTime * _walkSpeed * 5) * 0.05f;
         
+        // tail frequency
         _tailRotation = (float)Math.Sin(_elapsedTime * 3) * 0.05f;
     }
 
@@ -73,6 +77,7 @@ public class Tiger
         
         spriteBatch.Begin(transformMatrix: rootMatrix);
         
+        // front left leg
         Vector2 frontLeftPosition = new Vector2(10, 20);
         Vector2 legOrigin = new Vector2(_bodyTexture.Width / 2, _bodyTexture.Height / 2);
         spriteBatch.Draw(_frontLegTexture,
@@ -85,6 +90,7 @@ public class Tiger
             SpriteEffects.None,
             0.0f);
         
+        // back left leg
         Vector2 backLeftPos = new Vector2(30, 20);
         Vector2 backLegOrigin = new Vector2(_bodyTexture.Width / 2, _bodyTexture.Height / 2);
         spriteBatch.Draw(_backLegTexture,
@@ -97,6 +103,7 @@ public class Tiger
             SpriteEffects.None,
             0.0f);
         
+        // body
         Vector2 bodyOrigin = new Vector2(_bodyTexture.Width / 2, _bodyTexture.Height / 2);
         spriteBatch.Draw(_bodyTexture,
                         Vector2.Zero,
@@ -108,8 +115,7 @@ public class Tiger
                         SpriteEffects.None,
                         0.0f);
         
-
-        
+        // front right leg
         Vector2 frontRightPosition = new Vector2(-10, 20);
         spriteBatch.Draw(_frontLegTexture,
                         frontRightPosition,
@@ -121,7 +127,7 @@ public class Tiger
                         SpriteEffects.None,
                         0.0f);
         
-        
+        // back right leg
         Vector2 backRightPos = new Vector2(0, 30);
         spriteBatch.Draw(_backLegTexture,
             backRightPos,
@@ -133,6 +139,7 @@ public class Tiger
             SpriteEffects.None,
             0.0f);
         
+        // tail
         Vector2 tailPos = new Vector2(-760, 7);
         Vector2 tailOrigin = new Vector2(0, _tailTexture.Height / 2);
         spriteBatch.Draw(_tailTexture,
